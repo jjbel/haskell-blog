@@ -10,7 +10,7 @@ myhtml =
     ( append_
       (h1_ "Heading")
       ( append_
-        (p_ "Paragraph #1")
+        (p_ "Paragraph #1. an html tag: <html>")
         (p_ "Paragraph #2")
       )
     )
