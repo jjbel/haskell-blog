@@ -2,6 +2,8 @@ module Html.Internal where
 
 -- * Types
 
+-- TODO use Text instead of String
+
 newtype Html
   = Html String
 
@@ -22,11 +24,25 @@ html_ title content =
       )
     )
 
+-- TODO can't put structures inside P
 p_ :: String -> Structure
 p_ = Structure . el "p" . escape
 
 h1_ :: String -> Structure
 h1_ = Structure . el "h1" . escape
+
+-- TODO unify ul and ol
+ul_ :: [Structure] -> Structure
+ul_ =
+  Structure . el "ul" . concat . map (el "li" . getStructureString)
+
+ol_ :: [Structure] -> Structure
+ol_ =
+  Structure . el "ol" . concat . map (el "li" . getStructureString)
+
+-- pre to render as-is, code to signify codeblock
+code_ :: String -> Structure
+code_ = Structure . el "pre" . el "code" . escape
 
 -- * Utilities
 
